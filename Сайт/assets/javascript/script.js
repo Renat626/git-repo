@@ -10,3 +10,4 @@ function answer() {
 	}
 	$("#inp").val("");
 }
+$('html').keydown(function(key) {if (key.which == 13) {answer()}});
