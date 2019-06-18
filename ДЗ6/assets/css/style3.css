@@ -1,0 +1,308 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #f7f7f7;
+}
+
+header {
+	background: url(../img/Прямоугольник_1.svg);
+	width: 100%;
+	height: 83px;
+	position: absolute;
+	margin-top: 13px;
+}
+
+.header {
+	width: 100%;
+	max-width: 972px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	width: 182px;
+	margin-top: 5px;
+}
+
+.logo a {
+	text-decoration: none;
+}
+
+.logo h1 {
+	color: #ffffff;
+	font-family: Poppins;
+	font-size: 36px;
+	font-weight: 500;
+	letter-spacing: 0.77px;
+}
+
+.logo p {
+	color: #ffffff;
+	font-family: Poppins;
+	font-size: 15px;
+	font-weight: 500;
+	margin-top: -10px;
+	text-transform: uppercase;
+	letter-spacing: 31.41px;
+}
+
+.info {	
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin-top: 30px;
+}
+
+.part1 {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin-right: 38px;
+}
+
+.part1 img {
+	margin-right: 13px;
+}
+
+.part1 p {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 400;
+	margin-top: 3px;
+}
+
+.part2 {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.part2 img {
+	margin-right: 13px;
+	margin-top: 6px;
+}
+
+.part2 p {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 400;
+	margin-top: 3px;
+}
+
+.search {
+	display: flex;
+	width: 208px;
+	height: 38px;
+	margin-top: 20px;
+}
+
+.search input { 
+	width: 157px;
+	border: 1px solid #ffffff;
+	padding-left: 16px;
+	color: #ffffff;
+	font-family: "Roboto Condensed";
+	font-size: 17px;
+	font-weight: 400;
+	background-color: transparent; 
+
+}
+
+.button {
+	width: 50px;
+	height: 38px;
+	border: 1px solid #ffffff;
+}
+
+.button img {
+	margin-top: 10px;
+	margin-left: 17px;
+}
+
+.menu {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 550px;
+	padding-top: 128px;
+}
+
+.menu ul {
+	list-style-type: none;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.menu li {
+	padding-right: 35px;
+}
+
+.menu li:last-child {
+	padding-right: 0;
+}
+
+.menu-link {
+	text-decoration: none;
+	color: #8c8c8c;
+	font-family: "Roboto Condensed";
+	font-size: 17px;
+	font-weight: 400;
+}
+
+.menu-link:hover {
+	color: #000;
+}
+
+.menu-link-active {
+	color: #000;
+	padding-bottom: 29px;
+	border-bottom: 3px solid #000;
+}
+
+hr {
+	margin-top: 29px;
+}
+
+.container2 {
+	background-color: #e8e8e8;
+	padding-bottom: 99px;
+}
+
+.content {
+	width: 972px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 80px;
+}
+
+.logo2 {
+	margin: 0 auto;
+	width: 220px;
+	padding-top: 174px;
+	text-align: center;
+}
+
+.logo2 h1 {
+	color: #f44336;
+	font-family: Poppins;
+	font-size: 36px;
+	font-weight: 500;
+}
+
+.picture input {
+	width: 470px;
+	height: 42px;
+	border: 1px solid #000;
+	font-family: Tahoma;
+	font-size: 14px;
+	padding-left: 15px;
+}
+
+.picture textarea {
+	width: 470px;
+	height: 168px;
+	border: 1px solid #000;
+	color: #8e8e8e;
+	font-family: Tahoma;
+	font-size: 14px;
+	padding-top: 15px;
+	padding-left: 13px;
+}
+
+.picture a {
+	width: 140px;
+	height: 40px;
+	background-color: #f44336;
+	display: inline-block;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ffffff;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: 400;
+	text-align: center;
+	line-height: 40px;
+}
+
+.picture a:hover {
+	background-color: #000;
+	transition: .2s linear;
+}
+
+.text2 h1 {
+	color: #f44336;
+	font-family: Poppins;
+	font-size: 36px;
+	font-weight: 500;
+	margin-bottom: 35px;
+}
+
+.text2 p {
+	width: 398px;
+	height: 203px;
+	color: #000000;
+	font-family: "Roboto Condensed";
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.padding-text2 h1 {
+	color: #f44336;
+	font-family: "Roboto Condensed";
+	font-size: 26px;
+	font-weight: 400;
+	margin-bottom: 18px;
+}
+
+.padding-text2 a {
+	color: #f44336;
+	text-decoration: none;
+}
+
+.color {
+	background-color:#f7f7f7;
+	padding-bottom: 194px;
+}
+
+.map {
+	width: 1169px;
+	padding-top: 25px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+footer {
+	width: 100%;
+	height: 71px;
+	background-color: #000000;
+}
+
+footer p {
+	width: 433px;
+	color: #ffffff;
+	font-family: "Roboto Condensed";
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 71px;
+	margin: 0 auto;
+}
+
+footer span {
+	color: #f44336;
+}
