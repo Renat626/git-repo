@@ -37,5 +37,6 @@ document.getElementById("renat").oninput = borderRadius;
 
 function borderRadius() {
 	var div = document.getElementById("test");
+	document.getElementById("result").innerHTML = this.value;
 	div.style.borderRadius = this.value + "px";
 }
