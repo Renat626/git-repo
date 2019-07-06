@@ -95,15 +95,35 @@
 
 .block_1:hover {
 	transform: translate(100px, -65px) scale(1.5) rotate(360deg);
-	z-index: 1;
 }
 
 .block_2:hover {
 	transform: translate(0, -65px) scale(1.5) rotate(360deg);
-	z-index: 1;
 }
 
 .block_3:hover {
 	transform: translate(-100px, -65px) scale(1.5) rotate(360deg);
-	z-index: 1;
+}
+
+.block2 {
+	width: 500px;
+	height: 700px;
+	border: 1px solid #000;
+	position: relative;
+	transition: all 1s linear;
+	overflow: hidden;
+}
+
+.block2::before {
+	content: "";
+	width: 500px;
+	height: 700px;
+	background: url(../img/tohvRMGscuM.jpg) no-repeat center / cover;
+	position: absolute;
+	top: -700px;
+	transition: all 1s linear;
+}
+
+.block2:hover::before {
+	top: 0;
 }
