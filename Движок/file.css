@@ -43,3 +43,16 @@
 	height: 11.1111111%;
 	z-index: 3;
 }
+#inv {
+	text-align: center;
+	font-size: 3vw;
+	color: white;
+	background-color: burlywood;
+	visibility: hidden;
+	position: absolute;
+	width: 25%;
+	height: 90%;
+	left: 2%;
+	top: 5%;
+	z-index: 5;
+}
