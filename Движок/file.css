@@ -1,0 +1,58 @@
+#area {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	display: grid;
+    grid-template-columns: repeat(19, 5.26315789%);
+    grid-template-rows: repeat(9, 11.1111111%);
+    z-index: 1;
+}
+#area > div {
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+#objarea {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	display: grid;
+    grid-template-columns: repeat(19, 5.26315789%);
+    grid-template-rows: repeat(9, 11.1111111%);
+    z-index: 2;
+}
+#objarea > div {
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+#player {
+	position: absolute;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url(img/playerS.png);
+	left: 47.3684211%;
+	top: 44.4444445%;
+	width: 5.26315789%;
+	height: 11.1111111%;
+	z-index: 3;
+}
+#inv {
+	text-align: center;
+	font-size: 3vw;
+	color: white;
+	background-color: burlywood;
+	visibility: hidden;
+	position: absolute;
+	width: 25%;
+	height: 90%;
+	left: 2%;
+	top: 5%;
+	z-index: 5;
+}
