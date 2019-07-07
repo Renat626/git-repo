@@ -47,15 +47,16 @@ html {
 	z-index: 3;
 }
 #inv {
+	line-height: 1.2vw;
 	text-align: center;
-	font-size: 3vw;
+	font-size: 2.8vw;
 	color: white;
 	background-color: burlywood;
-	visibility: hidden;
 	position: fixed;
 	width: 25%;
 	height: 90%;
-	left: 2%;
+	left: -500px;
 	top: 5%;
+	opacity: 0;
 	z-index: 5;
 }

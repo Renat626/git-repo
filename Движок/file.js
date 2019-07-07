@@ -188,7 +188,7 @@ var obj = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,		   
 		   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-var x = 9, y = 4, go = false, speed = 180;
+var x = 9, y = 4, go = false, inv = false, speed = 180;
 var playerSide = "S";
 
 $(document).ready(function() {
@@ -251,8 +251,11 @@ $('html').keydown(function(key) {
 		}
 	}
 	if (key.which == 69) { // E
-		if ($("#inv").css("visibility") == "hidden") {$("#inv").css("visibility", "visible")}
-		else {$("#inv").css("visibility", "hidden")}
+		if (inv == false) {
+			inv = true;
+			if ($("#inv").css("opacity") == 0) {$("#inv").animate({opacity: 1,left: 30}, 800, function() {inv = false});}
+			if ($("#inv").css("opacity") == 1){$("#inv").animate({opacity: 0,left: -500}, 800, function() {inv = false});}
+		}
 	}
 	if (key.which == 70) { // F
 		var a = Math.abs(x + 54 * y + 1);
