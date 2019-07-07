@@ -127,3 +127,104 @@
 .block2:hover::before {
 	top: 0;
 }
+
+.block3 {
+	
+	
+}
+
+.dop__block3 {
+	width: 200px;
+	height: 114px;
+	background-color: purple;
+}
+
+.dop__block31 {
+	animation: firstAnimation 2s linear 0s 1 normal;
+}
+
+.dop__block32 {
+	animation: secondAnimation 2s linear 0s 1 normal;
+}
+
+.dop__block33 {
+	animation: thirdAnimation 2s linear 0s 1 normal;
+}
+
+@keyframes firstAnimation {
+	0% {
+		transform: rotate(360deg);
+	}
+	50% {
+		transform: rotate(60deg);
+	}
+	60% {
+		transform: rotate(60deg);
+	}
+	70% {
+		transform: rotate(60deg);
+	}
+	80% {
+		transform: rotate(60deg);
+	}
+	90% {
+		transform: rotate(60deg);
+	}
+	100% {
+		width: 400px;
+		height: 228px;
+		transform: rotate(60deg);
+	}
+}
+
+@keyframes secondAnimation {
+	0% {
+		transform: rotate(360deg);
+	}
+	50% {
+		transform: translateY(-114px) rotate(-60deg);
+	}
+	60% {
+		transform: translateY(-114px) rotate(-60deg);
+	}
+	70% {
+		transform: translateY(-228px) rotate(-60deg);
+	}
+	80% {
+		transform: translateY(-228px) rotate(-60deg);
+	}
+	90% {
+		transform: translateY(-228px) rotate(-60deg);
+	}
+	100% {
+		width: 400px;
+		height: 228px;
+		transform: translateY(-228px) rotate(-60deg);
+	}
+}
+
+@keyframes thirdAnimation {
+	0% {
+		transform: rotate(360deg);
+	}
+	50% {
+		transform: translateY(-228px);
+	}
+	60% {
+		transform: translateY(-228px);
+	}
+	70% {
+		transform: translateY(-456px);
+	}
+	80% {
+		transform: translateY(-456px);
+	}
+	90% {
+		transform: translateY(-456px);
+	}
+	100% {
+		width: 400px;
+		height: 228px;
+		transform: translateY(-456px)
+	}
+}
