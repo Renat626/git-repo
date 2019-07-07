@@ -1,3 +1,6 @@
+html {
+	overflow: hidden;
+}
 #area {
 	position: absolute;
 	width: 100%;
@@ -5,8 +8,8 @@
 	left: 0;
 	top: 0;
 	display: grid;
-    grid-template-columns: repeat(19, 5.26315789%);
-    grid-template-rows: repeat(9, 11.1111111%);
+    grid-template-columns: repeat(54, 5.26315789%);
+    grid-template-rows: repeat(54, 11.1111111%);
     z-index: 1;
 }
 #area > div {
@@ -22,8 +25,8 @@
 	left: 0;
 	top: 0;
 	display: grid;
-    grid-template-columns: repeat(19, 5.26315789%);
-    grid-template-rows: repeat(9, 11.1111111%);
+    grid-template-columns: repeat(54, 5.26315789%);
+    grid-template-rows: repeat(54, 11.1111111%);
     z-index: 2;
 }
 #objarea > div {
@@ -49,7 +52,7 @@
 	color: white;
 	background-color: burlywood;
 	visibility: hidden;
-	position: absolute;
+	position: fixed;
 	width: 25%;
 	height: 90%;
 	left: 2%;
