@@ -151,6 +151,18 @@
 	animation: thirdAnimation 2s linear 0s 1 normal;
 }
 
+.dop__block31:hover {
+	animation-play-state: paused;
+}
+
+.dop__block32:hover {
+	animation-play-state: paused;
+}
+
+.dop__block33:hover {
+	animation-play-state: paused;
+}
+
 @keyframes firstAnimation {
 	0% {
 		transform: rotate(360deg);
@@ -225,6 +237,6 @@
 	100% {
 		width: 400px;
 		height: 228px;
-		transform: translateY(-456px)
+		transform: translateY(-456px);
 	}
 }
