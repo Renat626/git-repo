@@ -200,7 +200,7 @@ $(document).ready(function() {
 	}
 	for (var i = 1; i < 2917; i++) {
 		$("#objarea").append("<div id=b"+i+"></div>");
-		if (parseInt(Math.random() * 5) == 0) {obj[i - 1] = 1}
+		if (parseInt(Math.random() * 100) == 0) {obj[i - 1] = 1}
 		$("#b" + i).css("background-image", "url("+objtyper(obj[i - 1])+")");
 	}
 });
