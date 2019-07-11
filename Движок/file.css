@@ -1,6 +1,20 @@
 html {
 	overflow: hidden;
 }
+body {
+	background-color: gray;
+}
+#loading {
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	height: 2vw;
+	left: 0;
+	top: calc(50% - 6vw);
+	font-size: 10vw;
+	color: white;
+	z-index: 1000;
+}
 #area {
 	position: absolute;
 	width: 100%;
@@ -37,6 +51,7 @@ html {
 }
 #player {
 	position: absolute;
+	visibility: hidden;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url(img/playerS.png);
@@ -46,17 +61,66 @@ html {
 	height: 11.1111111%;
 	z-index: 3;
 }
+#action {
+	background-color: lightgray;
+	position: absolute;
+	visibility: hidden;
+	left: 0;
+	top: 0;
+	width: 5.26315789%;
+	height: 3%;
+	z-index: 3;
+}
+#actionLoad {
+	background-color: lime;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 0px;
+	height: 100%;
+	z-index: 3;
+}
 #inv {
-	line-height: 1.2vw;
 	text-align: center;
 	font-size: 2.8vw;
-	color: white;
-	background-color: burlywood;
+	color: gray;
+	background-color: wheat;
 	position: fixed;
-	width: 25%;
-	height: 90%;
-	left: -500px;
-	top: 5%;
+	width: 80%;
+	height: 80%;
+	left: 10%;
+	top: -100%;
 	opacity: 0;
 	z-index: 5;
+}
+#slots {
+	position: absolute;
+	width: 100%;
+	height: 60%;
+	left: 0;
+	top: 40%;
+	display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(3, 33.3333333%);
+}
+.slot {
+	font-size: 32px;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: none; 
+}
+#ui {
+	visibility: hidden;
+	background-color: transparent;
+	position: fixed;
+	width: 60%;
+	height: 6%;
+	left: 20%;
+	top: 92%;
+	z-index: 5;
+}
+.ui {
+	width: 5%;
+	height: 100%;
 }
