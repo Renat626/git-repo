@@ -138,3 +138,29 @@ body {
 	width: 5%;
 	height: 100%;
 }
+#modalWindow {
+	border-width: 5px;
+	border-color: white;
+	background-color: royalblue;
+	color: white;
+	visibility: hidden;
+	position: fixed;
+	text-align: center;
+	font-size: 40px;
+	width: 40%;
+	height: 58px;
+	left: 30%;
+	top: calc(50% - 29px);
+	z-index: 1000;
+}
+#backWindow {
+	background-color: black;
+	visibility: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	opacity: 0.8;
+	z-index: 999;
+}

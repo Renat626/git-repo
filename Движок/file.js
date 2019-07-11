@@ -47,14 +47,14 @@ function pickuping() {
 	if (obj[n] == 4) {
 		var cant = true;
 		for (var i = 1; i < 31; i++) {if (slotItem[i] == 0) {slotItem[i] = 4; i = 32; cant = false;}}
-		if (cant == true) {alert("Ваш инвентарь заполнен")}
+		if (cant == true) {showModalWindow()}
 		else {obj[n] = 0; $("#b" + n).css("background-image", ""); invUpdate();}
 	}
 }
 function invAddItem(item) {
 	var cant = true;
 	for (var i = 1; i < 31; i++) {if (slotItem[i] == 0) {slotItem[i] = item; i = 32; cant = false;}}
-	if (cant == true) {alert("Ваш инвентарь заполнен")}
+	if (cant == true) {showModalWindow()}
 	else {invUpdate()}
 } 
 function invUpdate() {
@@ -131,7 +131,7 @@ $('html').keydown(function(key) {
 					if (playerSide == "S" && obj[s] == 1 && equip[0] == 0) {action("tree", s, 8000)}
 			    	if (playerSide == "D" && obj[d] == 1 && equip[0] == 0) {action("tree", d, 8000)}
 				}
-				else {alert("Ваш инвентарь заполнен")}
+				else {showModalWindow()}
 			}
 		}
 		else {
@@ -154,7 +154,7 @@ $('html').keydown(function(key) {
 				invUpdate();
 			}
 			if (key.which == 32) { // SPACE [INV]
-				
+				invAddItem(2.3);
 			}
 		}
 		if (key.which == 16) {speed = 100} //SHIFT
@@ -195,4 +195,16 @@ $('html').keyup(function(key) {
 function physics(object) {
 	if (object == 0 || object == 4) {return "no"}
 	return "yes"
+}
+
+function hideModalWindow() {
+	lockKeys = false;
+	$("#backWindow").css("visibility", "hidden"); 
+	$("#modalWindow").css("visibility", "hidden");
+}
+
+function showModalWindow() {
+	lockKeys = true; 
+	$("#backWindow").css("visibility", "visible"); 
+	$("#modalWindow").css("visibility", "visible");
 }
