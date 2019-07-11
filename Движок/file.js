@@ -1,4 +1,4 @@
-var map = [], obj = [], evn = [], hp = 100, fp = 100;
+var map = [], obj = [], hp = 100, fp = 100;
 var x = 9, y = 4, go = false, inv = false, speed = 170, screen = false, lockKeys = true, lockInv = false;
 var playerSide = "S", equip = [0,0,0,0,0]; //ОРУЖИЕ, ГОЛОВА, ТЕЛО, НОГИ, ПЯТКИ 
 var slotItem =  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], selectSlot = 0;
@@ -11,7 +11,7 @@ $(document).ready(function() {
 	}
 	for (var i = 1; i < 2917; i++) {
 		$("#objarea").append("<div id=b"+i+"></div>");
-		obj[i] = 0; evn[i] = 0;
+		obj[i] = 0;
 		if (parseInt(Math.random() * 10) == 0) {obj[i] = 1}
 		if (parseInt(Math.random() * 200) == 0) {obj[i] = 2}
 		if (parseInt(Math.random() * 180) == 0) {obj[i] = 2.2}
@@ -116,20 +116,20 @@ $('html').keydown(function(key) {
 				if (cant == false) {
 					var w = Math.abs(x + 54 * y - 53), a = Math.abs(x + 54 * y), s = Math.abs(x + 54 * y + 55), d = Math.abs(x + 54 * y + 2);
 				
-					if (playerSide == "W" && obj[w] == 2 && evn[w] == 0) {action("bush", w, 1000)}
-					if (playerSide == "A" && obj[a] == 2 && evn[a] == 0) {action("bush", a, 1000)}
-					if (playerSide == "S" && obj[s] == 2 && evn[s] == 0) {action("bush", s, 1000)}
-					if (playerSide == "D" && obj[d] == 2 && evn[d] == 0) {action("bush", d, 1000)}
+					if (playerSide == "W" && obj[w] == 2) {action("bush", w, 1000, 30000)}
+					if (playerSide == "A" && obj[a] == 2) {action("bush", a, 1000, 30000)}
+					if (playerSide == "S" && obj[s] == 2) {action("bush", s, 1000, 30000)}
+					if (playerSide == "D" && obj[d] == 2) {action("bush", d, 1000, 30000)}
 	
-					if (playerSide == "W" && obj[w] == 2.2 && evn[w] == 0) {action("bush", w, 1000)}
-					if (playerSide == "A" && obj[a] == 2.2 && evn[a] == 0) {action("bush", a, 1000)}
-					if (playerSide == "S" && obj[s] == 2.2 && evn[s] == 0) {action("bush", s, 1000)}
-					if (playerSide == "D" && obj[d] == 2.2 && evn[d] == 0) {action("bush", d, 1000)}
+					if (playerSide == "W" && obj[w] == 2.2) {action("bush", w, 1000, 30000)}
+					if (playerSide == "A" && obj[a] == 2.2) {action("bush", a, 1000, 30000)}
+					if (playerSide == "S" && obj[s] == 2.2) {action("bush", s, 1000, 30000)}
+					if (playerSide == "D" && obj[d] == 2.2) {action("bush", d, 1000, 30000)}
 	
-					if (playerSide == "W" && obj[w] == 1 && evn[w] == 0 && equip[0] == 0) {action("tree", w, 8000)}
-					if (playerSide == "A" && obj[a] == 1 && evn[a] == 0 && equip[0] == 0) {action("tree", a, 8000)}
-					if (playerSide == "S" && obj[s] == 1 && evn[s] == 0 && equip[0] == 0) {action("tree", s, 8000)}
-			    	if (playerSide == "D" && obj[d] == 1 && evn[d] == 0 && equip[0] == 0) {action("tree", d, 8000)}
+					if (playerSide == "W" && obj[w] == 1 && equip[0] == 0) {action("tree", w, 8000)}
+					if (playerSide == "A" && obj[a] == 1 && equip[0] == 0) {action("tree", a, 8000)}
+					if (playerSide == "S" && obj[s] == 1 && equip[0] == 0) {action("tree", s, 8000)}
+			    	if (playerSide == "D" && obj[d] == 1 && equip[0] == 0) {action("tree", d, 8000)}
 				}
 				else {alert("Ваш инвентарь заполнен")}
 			}
@@ -154,21 +154,26 @@ $('html').keydown(function(key) {
 				invUpdate();
 			}
 			if (key.which == 32) { // SPACE [INV]
-				invAddItem(4);
+				
 			}
 		}
 		if (key.which == 16) {speed = 100} //SHIFT
 	}
 });
 
-function action(type, n, time) {
+function action(type, n, time, outTime) {
 	var w = Math.abs(x + 54 * y - 53), a = Math.abs(x + 54 * y), s = Math.abs(x + 54 * y + 55), d = Math.abs(x + 54 * y + 2);
 	lockKeys = true; $("#action").css("left", $("#player").offset().left); $("#action").css("top", $("#player").offset().top - 20); $("#action").css("visibility", "visible");
+	var knowItem;
 	if (type == "bush") {
-		if (obj[n] == 2.2) {invAddItem(2.3)} else {invAddItem(2.1)}
-		evn[n] = 50; obj[n] = 3;
+		if (obj[n] == 2.2) {invAddItem(2.3); knowItem = 2} else {invAddItem(2.1); knowItem = 1}
+		obj[n] = 3;
 		$("#actionLoad").animate({width: $("#action").width()}, time, function() {
 		    $("#b" + n).css("background-image", "url(img/bush.png)");
+		    setTimeout(function() {
+		    	if (knowItem == 1) {$("#b" + n).css("background-image", "url(img/redbush.png)"); obj[n] = 2}
+		    	else {$("#b" + n).css("background-image", "url(img/bluebush.png)"); obj[n] = 2.2}
+		    }, outTime);
 			$("#action").css("visibility", "hidden"); lockKeys = false;
 			$("#actionLoad").width(0);
 		})
