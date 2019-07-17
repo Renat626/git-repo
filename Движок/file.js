@@ -30,7 +30,7 @@ setInterval(function() {
 	if (screen == false) {$("html").animate({scrollLeft: 0, scrollTop: 0}, 0);}
 	if (fp > 0) {fp = fp - 0.012} else {hp = hp - 0.05; fp = 0}
 	if (fp > 0 && hp < 100) {hp = hp + 0.05}
-	if (hp == 0) {death()}
+	if (hp < 0) {death()}
 	if (fp < 90 && $("#food1").attr("src") != "img/darkfood.png") {$("#food1").attr("src", "img/darkfood.png")} else if (fp > 90 && $("#food1").attr("src") != "img/food.png") {$("#food1").attr("src", "img/food.png")}
 	if (fp < 80 && $("#food2").attr("src") != "img/darkfood.png") {$("#food2").attr("src", "img/darkfood.png")} else if (fp > 80 && $("#food2").attr("src") != "img/food.png") {$("#food2").attr("src", "img/food.png")}
 	if (fp < 70 && $("#food3").attr("src") != "img/darkfood.png") {$("#food3").attr("src", "img/darkfood.png")} else if (fp > 70 && $("#food3").attr("src") != "img/food.png") {$("#food3").attr("src", "img/food.png")}
