@@ -1,4 +1,4 @@
-var map = [], obj = [], hp = 11, fp = 2;
+var map = [], obj = [], hp = 100, fp = 100;
 var x = 9, y = 4, go = false, inv = false, craft = false, speed = 170, screen = false, lockKeys = true, lockInv = false, lockCraft = false;
 var playerSide = "S", craftPage = 1, useKick = true, equip = [0,0,0,0,0]; //ОРУЖИЕ, ГОЛОВА, ТЕЛО, НОГИ, ПЯТКИ 
 var slotItem =  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], selectSlot = 0;
@@ -189,7 +189,32 @@ $('html').keydown(function(key) {
 				if (craftPage < 2) {craftPage++;craftUpdate();}
 			}
 			if (key.which == 32) { // SPACE [CRAFT]
+				var canCraft = false, stick = 0, wood = 0;
+				for (var i = 1; i < 31; i++) {
+					if (slotItem[i] == 0) {canCraft = true}
+					if (slotItem[i] == 4) {stick++}
+					if (slotItem[i] == 5) {wood++}
+				}
+				if (canCraft == true) {
+					if (craftPage == 1 && stick >= 2 && wood >= 1) {
+						stick = 2; wood = 1;
+						for (var i = 30; i > 0; i--) {
+							if (slotItem[i] == 4 && stick > 0) {stick--;slotItem[i] = 0}
+							if (slotItem[i] == 5 && wood > 0) {wood--;slotItem[i] = 0}
+						}
+						invUpdate(); invAddItem(10.1); invUpdate(); craftUpdate();
+					} else if (craftPage == 1) {showModalWindow("Недостаточно ресурсов", 32)}
 
+					if (craftPage == 2 && stick >= 2 && wood >= 2) {
+						stick = 2; wood = 2;
+						for (var i = 30; i > 0; i--) {
+							if (slotItem[i] == 4 && stick > 0) {stick--;slotItem[i] = 0}
+							if (slotItem[i] == 5 && wood > 0) {wood--;slotItem[i] = 0}
+						}
+						invUpdate(); invAddItem(10.2); invUpdate(); craftUpdate();
+					} else if (craftPage == 2) {showModalWindow("Недостаточно ресурсов", 32)}
+
+				} else {showModalWindow("Инвентарь заполнен", 32)}
 			}
 		}
 		if (key.which == 16) {speed = 100} //SHIFT
@@ -306,6 +331,8 @@ function objtyper(type, fix) {
 	if (type == 4 && fix == true) {return "img/stick1.png"}
 	if (type == 4) {if (parseInt(Math.random() * 2) == 0) {return "img/stick1.png"} else {{return "img/stick2.png"}}}
 	if (type == 5) {return "img/wood.png"}
+	if (type == 10.1) {return "img/woodenAxe.png"}
+	if (type == 10.2) {return "img/woodenPickaxe.png"}
 	if (type == 9) {return "img/chuvak.gif"}
 	return "img/error.png";
 }
@@ -334,8 +361,7 @@ function pickuping() {
 	if (obj[n] == 4) {
 		var cant = true;
 		for (var i = 1; i < 31; i++) {if (slotItem[i] == 0) {slotItem[i] = 4; i = 32; cant = false;}}
-		if (cant == true) {showModalWindow("Инвентарь заполнен", 32)}
-		else {obj[n] = 0; $("#b" + n).css("background-image", ""); invUpdate();}
+		if (cant == false) {obj[n] = 0; $("#b" + n).css("background-image", ""); invUpdate();}
 	}
 }
 
