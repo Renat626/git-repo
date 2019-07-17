@@ -5,6 +5,7 @@ var slotItem =  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 //ГЕНЕРАЦИЯ ПРИ ЗАГРУЗКЕ
 $(document).ready(function() {
+	$("#page").offset({top: $("#page").offset().top - 30});
 	for (var i = 1; i < 2917; i++) {
 		$("#area").append("<div id=a"+i+"></div>");
 		map[i] = 0;
@@ -63,6 +64,10 @@ $('html').keydown(function(key) {
 				else {lockCraft = false}
 				if ($("#craft").css("opacity") == 0) {$("#craft").animate({opacity: 1, top: 30}, 350, function() {craft = false});}
 				if ($("#craft").css("opacity") == 1) {$("#craft").animate({opacity: 0, top: -parseInt($("#craft").width())}, 350, function() {craft = false});}
+				if ($("#craft").css("opacity") == 0) {
+					craftUpdate();
+
+				}
 			}
 		}
 		if (key.which == 69) { // E
@@ -72,6 +77,7 @@ $('html').keydown(function(key) {
 				else {lockInv = false}
 				if ($("#inv").css("opacity") == 0) {$("#inv").animate({opacity: 1, top: 30}, 350, function() {inv = false});}
 				if ($("#inv").css("opacity") == 1) {$("#inv").animate({opacity: 0, top: -parseInt($("#inv").width())}, 350, function() {inv = false})}
+				$("#use").text(""); $("#kick").text(""); $("#use").css("background-color", "wheat"); $("#kick").css("background-color", "wheat"); useKick = true;
 			}
 		}
 		if (lockInv == false && lockCraft == false) {
@@ -182,13 +188,13 @@ $('html').keydown(function(key) {
 
 			}
 			if (key.which == 65) { // A [CRAFT]
-
+				if (craftPage != 1) {craftPage--;craftUpdate();}
 			}
 			if (key.which == 83) { // S [CRAFT]
 
 			}
 			if (key.which == 68) { // D [CRAFT]
-
+				if (craftPage < 2) {craftPage++;craftUpdate();}
 			}
 			if (key.which == 32) { // SPACE [CRAFT]
 
@@ -202,7 +208,30 @@ $('html').keydown(function(key) {
 });
 
 function craftUpdate() {
-
+	var stick = 0, wood = 0;
+	for (var i = 1; i < 31; i++) {
+		if (slotItem[i] == 4) {stick++}
+		if (slotItem[i] == 5) {wood++}
+	}
+	var craftTitle = [0, "Деревянный топор", "Деревянная кирка"];
+	var craftNeed1 = [0, "2 палки, ", "2 палки, "]; 
+	var craftNeed2 = [0, "1 дерево", "2 дерева"];
+	var craftNeed3 = [0, "", ""];
+	var craftUrl = [0, "img/woodenAxe.png", "img/woodenPickaxe.png"]
+	$("#title").text(craftTitle[craftPage]);
+	$("#need1").text(craftNeed1[craftPage]);
+	$("#need2").text(craftNeed2[craftPage]);
+	$("#need3").text(craftNeed3[craftPage]);
+	$("#craftImage").css("background-image", "url("+craftUrl[craftPage]+")");
+	$("#page").text(craftPage);
+	if (craftPage == 1) {
+		if (stick < 2) {$("#need1").css("color", "red")} else {$("#need1").css("color", "lime")}
+		if (wood < 1) {$("#need2").css("color", "red")} else {$("#need2").css("color", "lime")}
+	}
+    if (craftPage == 2) {
+		if (stick < 2) {$("#need1").css("color", "red")} else {$("#need1").css("color", "lime")}
+		if (wood < 2) {$("#need2").css("color", "red")} else {$("#need2").css("color", "lime")}
+	}
 }
 
 function invUpdate() {

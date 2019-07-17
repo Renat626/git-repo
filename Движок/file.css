@@ -17,6 +17,14 @@ body {
 	opacity: 0;
 	z-index: 5;
 }
+#craftImage {
+	margin-left: 30%;
+	height: 80%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url(img/woodenAxe.png); 
+}
+#page {font-weight: bold;}
 #loading {
 	position: fixed;
 	text-align: center;
