@@ -1,4 +1,4 @@
-var map = [], obj = [], hp = 20, fp = 2;
+var map = [], obj = [], hp = 11, fp = 2;
 var x = 9, y = 4, go = false, inv = false, craft = false, speed = 170, screen = false, lockKeys = true, lockInv = false, lockCraft = false;
 var playerSide = "S", craftPage = 1, useKick = true, equip = [0,0,0,0,0]; //ОРУЖИЕ, ГОЛОВА, ТЕЛО, НОГИ, ПЯТКИ 
 var slotItem =  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], selectSlot = 0;
@@ -30,7 +30,7 @@ setInterval(function() {
 	if (screen == false) {$("html").animate({scrollLeft: 0, scrollTop: 0}, 0);}
 	if (fp > 0) {fp = fp - 0.012} else {hp = hp - 0.05; fp = 0}
 	if (fp > 0 && hp < 100) {hp = hp + 0.05}
-	if (hp < 0) {death()}
+	if (hp < 0) {$("#backWindow").css("background-color", "red"); death()}
 	if (fp < 90 && $("#food1").attr("src") != "img/darkfood.png") {$("#food1").attr("src", "img/darkfood.png")} else if (fp > 90 && $("#food1").attr("src") != "img/food.png") {$("#food1").attr("src", "img/food.png")}
 	if (fp < 80 && $("#food2").attr("src") != "img/darkfood.png") {$("#food2").attr("src", "img/darkfood.png")} else if (fp > 80 && $("#food2").attr("src") != "img/food.png") {$("#food2").attr("src", "img/food.png")}
 	if (fp < 70 && $("#food3").attr("src") != "img/darkfood.png") {$("#food3").attr("src", "img/darkfood.png")} else if (fp > 70 && $("#food3").attr("src") != "img/food.png") {$("#food3").attr("src", "img/food.png")}
@@ -50,7 +50,8 @@ setInterval(function() {
 	if (hp < 30 && $("#heart7").attr("src") != "img/darkheart.png") {$("#heart7").attr("src", "img/darkheart.png")} else if (hp > 30 && $("#heart7").attr("src") != "img/heart.png") {$("#heart7").attr("src", "img/heart.png")}
 	if (hp < 20 && $("#heart8").attr("src") != "img/darkheart.png") {$("#heart8").attr("src", "img/darkheart.png")} else if (hp > 20 && $("#heart8").attr("src") != "img/heart.png") {$("#heart8").attr("src", "img/heart.png")}
 	if (hp < 10 && $("#heart9").attr("src") != "img/darkheart.png") {$("#heart9").attr("src", "img/darkheart.png")} else if (hp > 10 && $("#heart9").attr("src") != "img/heart.png") {$("#heart9").attr("src", "img/heart.png")}
-	if (hp == 0 && $("#heart10").attr("src") != "img/darkheart.png") {$("#heart10").attr("src", "img/darkheart.png")} else if (hp > 0 && $("#heart10").attr("src") != "img/heart.png") {$("#heart10").attr("src", "img/heart.png")}
+	if (hp < 0 && $("#heart10").attr("src") != "img/darkheart.png") {$("#heart10").attr("src", "img/darkheart.png")} else if (hp > 0 && $("#heart10").attr("src") != "img/heart.png") {$("#heart10").attr("src", "img/heart.png")}
+	if (hp < 10 && hp > 0) {if ($("#redWindow").css("opacity") == 0) {$("#redWindow").animate({opacity: 0.4}, 1000)} else if ($("#redWindow").css("opacity") == 0.4) {$("#redWindow").animate({opacity: 0}, 1000)}}
 }, 100);
 
 //НАЖАТИЕ КЛАВИШ
@@ -64,10 +65,7 @@ $('html').keydown(function(key) {
 				else {lockCraft = false}
 				if ($("#craft").css("opacity") == 0) {$("#craft").animate({opacity: 1, top: 30}, 350, function() {craft = false});}
 				if ($("#craft").css("opacity") == 1) {$("#craft").animate({opacity: 0, top: -parseInt($("#craft").width())}, 350, function() {craft = false});}
-				if ($("#craft").css("opacity") == 0) {
-					craftUpdate();
-
-				}
+				if ($("#craft").css("opacity") == 0) {craftUpdate()}
 			}
 		}
 		if (key.which == 69) { // E
@@ -184,14 +182,8 @@ $('html').keydown(function(key) {
 			}
 		}
 		else if (lockCraft == true) {
-			if (key.which == 87) { // W [CRAFT]
-
-			}
 			if (key.which == 65) { // A [CRAFT]
 				if (craftPage != 1) {craftPage--;craftUpdate();}
-			}
-			if (key.which == 83) { // S [CRAFT]
-
 			}
 			if (key.which == 68) { // D [CRAFT]
 				if (craftPage < 2) {craftPage++;craftUpdate();}
@@ -263,7 +255,7 @@ function action(type, n, time, outTime) {
 		})
 	}
 	if (type == "tree") {
-		obj[n] = 0;
+		obj[n] = 0; invAddItem(5);
 		$("#actionLoad").animate({width: $("#action").width()}, time, function() {
 			$("#b" + n).css("background-image", "");
 			$("#action").css("visibility", "hidden"); lockKeys = false;
@@ -313,6 +305,7 @@ function objtyper(type, fix) {
 	if (type == 3) {return "img/bush.png"}
 	if (type == 4 && fix == true) {return "img/stick1.png"}
 	if (type == 4) {if (parseInt(Math.random() * 2) == 0) {return "img/stick1.png"} else {{return "img/stick2.png"}}}
+	if (type == 5) {return "img/wood.png"}
 	if (type == 9) {return "img/chuvak.gif"}
 	return "img/error.png";
 }
