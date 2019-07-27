@@ -7,7 +7,7 @@ function menu() {
 	}
 	else {
 		nav = false;
-		$("#nav").css("display", "none");
+		$("#nav").css("display", "");
 		$("ul").css("display", "flex");
 	}
 }
