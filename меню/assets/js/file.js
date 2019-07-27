@@ -13,6 +13,8 @@ function menu() {
 }
 function resize() {
 	if ($(window).width() > 900) {
+		nav = false;
+		$("#nav").css("display", "");
 		$("ul").css("display", "flex");
 	}
 }
