@@ -114,8 +114,37 @@ body {
 	opacity: 0;
 	z-index: 5;
 }
+#wearUI {
+	position: absolute;
+	width: 50%;
+	height: 20%;
+	left: 0px;
+	top: 20%;
+	display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(1, 100%);
+}
+.wear {
+	border-width: 2px;
+	border-color: burlywood;
+	border-style: solid;
+	margin-left: 1px;
+	margin-bottom: 1px; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: none;
+}
+#itemName {
+	position: absolute;
+	color: darkslategray;
+	font-size: 8vh;
+	top: 45%;
+	left: calc(25% + 10px);
+	width: 1000px;
+}
 #use {
 	position: absolute;
+	margin-bottom: 0.5px;
 	line-height: 15vh;
 	font-size: 11vh;
 	width: 50%;
@@ -125,6 +154,7 @@ body {
 }
 #kick {
 	position: absolute;
+	margin-bottom: 0.5px;
 	line-height: 15vh;
 	font-size: 11vh;
 	width: 50%;
@@ -145,9 +175,13 @@ body {
 .slot {
 	font-size: 32px;
 	font-weight: bold;
+	border-width: 2px;
+	border-color: burlywood;
+	border-style: solid;
+	margin-left: 1px;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-image: none; 
+	background-image: none;
 }
 #ui {
 	visibility: hidden;
