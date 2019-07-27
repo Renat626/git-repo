@@ -15,20 +15,18 @@ li {
 header {
 	width: 100%;
 	background-color: #000;
-	height: 200px;
+	
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
 	justify-content: center;
-	text-align: center;
 }
 
 nav {
 	width: 500px;
 	padding-top: 20px;
-	margin-bottom: 50px;
 }
 
 ul {
@@ -56,18 +54,35 @@ ul {
 	display: none;
 }
 
-@media screen and (max-width: 900px) {
-	header {
-		display: block;
-	}
+.main {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+}
 
+
+@media screen and (max-width: 900px) {
 	nav {
-		margin-left: calc(50% - 50px);
 		display: none;
 		width: 100px;
 	}
 
 	.div {
+		display: block;
+		height: 29px;
+	}
+
+	header {
+		display: flex;
+		justify-content: center;
+	}
+
+	.main {
+		max-width: 100px;
+		text-align: center;
 		display: block;
 	}
 }
