@@ -11,3 +11,8 @@ function menu() {
 		$("ul").css("display", "flex");
 	}
 }
+function resize() {
+	if ($(window).width() > 900) {
+		$("ul").css("display", "flex");
+	}
+}
