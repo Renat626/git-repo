@@ -1,0 +1,13 @@
+#basket {
+	background-color: white;
+	color: black;
+	width: 90%;
+	height: 20%;
+	margin-left: 5%;
+	margin-top: 5%;
+	display: flex;
+	text-align: center;
+}
+#basket div {
+	margin-right: 5%;
+}
