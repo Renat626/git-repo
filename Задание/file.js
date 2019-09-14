@@ -9,44 +9,25 @@ window.onload = function() {
 	}
 }
 function populate(jsonObj) {
-	let div1 = document.createElement('div');
-	div1.id = jsonObj[0]['id_product'];
-	basket.appendChild(div1);
+	for (let i = 0; i < jsonObj.length; i++) {
+		let divObj = document.createElement('div');
+		divObj.id = jsonObj[i]['id_product'];
+		basket.appendChild(divObj);
 	
-	let img1 = document.createElement('img');
-	img1.src = "https://placehold.it/200x150";
-	div1.appendChild(img1);
-
-	let name1 = document.createElement('h1');
-	name1.textContent = jsonObj[0]['product_name'];
-	div1.appendChild(name1);
-
-	let price1 = document.createElement('h3');
-	price1.textContent = jsonObj[0]['price'];
-	div1.appendChild(price1);
-
-	let button1 = document.createElement('button');
-	button1.textContent = "Купить";
-	div1.appendChild(button1);
-
-
-	let div2 = document.createElement('div');
-	div2.id = jsonObj[1]['id_product'];
-	basket.appendChild(div2);
-
-	let img2 = document.createElement('img');
-	img2.src = "https://placehold.it/200x150";
-	div2.appendChild(img2);
-
-	let name2 = document.createElement('h1');
-	name2.textContent = jsonObj[1]['product_name'];
-	div2.appendChild(name2);
-
-	let price2 = document.createElement('h3');
-	price2.textContent = jsonObj[1]['price'];
-	div2.appendChild(price2);
-
-	let button2 = document.createElement('button');
-	button2.textContent = "Купить";
-	div2.appendChild(button2);
+		let imgObj = document.createElement('img');
+		imgObj.src = "https://placehold.it/200x150";
+		divObj.appendChild(imgObj);
+	
+		let nameObj = document.createElement('h1');
+		nameObj.textContent = jsonObj[i]['product_name'];
+		divObj.appendChild(nameObj);
+	
+		let priceObj = document.createElement('h3');
+		priceObj.textContent = jsonObj[i]['price'];
+		divObj.appendChild(priceObj);
+	
+		let buttonObj = document.createElement('button');
+		buttonObj.textContent = "Купить";
+		divObj.appendChild(buttonObj);
+	}
 }
