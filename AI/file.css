@@ -1,0 +1,35 @@
+.human {
+	background-color: royalblue;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	text-align: center;
+	color: white;
+	font-size: 28px;
+	line-height: 50px;
+	z-index: 5;
+}
+.tree {
+	background-color: green;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+.house {
+	background-color: brown;
+	position: absolute;
+	visibility: hidden;
+	width: 50px;
+	height: 50px;
+	z-index: 100;
+}
+.newTree {
+	background-color: lightgreen;
+	position: absolute;
+	visibility: hidden;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
