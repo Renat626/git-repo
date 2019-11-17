@@ -1,0 +1,5 @@
+#gc {
+	position: absolute;
+	left: calc(50% - 299px);
+	top: calc(50% - 299px);
+}
