@@ -16,9 +16,9 @@ function worldMath() {
 	}
 	if (lockInv == false) {
 		if (keye == true) {
-			if (openInv == false) {openInv = true; lockSpace = true; lockMove = true}
+			if (invOpen == false) {invOpen = true; lockSpace = true; lockMove = true}
 			else {
-				openInv = false; lockSpace = false; lockMove = false;
+				invOpen = false; lockSpace = false; lockMove = false;
 				for (let i = craft.length - 1; i >= 0; i--) {invAdd(craft[i].id, craft[i].n); craft[i].id = ""}
 				if (invCut.id != "") {invAdd(invCut.id, invCut.n); invCut.id=""}
 			}
@@ -27,7 +27,7 @@ function worldMath() {
 	}
 
 	if (openMsg == true && space == true) {
-		if (openInv == false) {lockSpace = false; lockMove = false}
+		if (invOpen == false) {lockSpace = false; lockMove = false}
 		space = false; openMsg = false; lockInv = false;
 	}
 
@@ -42,7 +42,10 @@ function worldMath() {
 	if (key9 == true) {key9 = false; hotbarN = 8}
 	if (key0 == true) {key0 = false; hotbarN = 9}
 
-	if (openInv == false) {
+	if (keyf == true) {keyf = false; useItem()}
+	if (keyq == true && invOpen	== false) {keyq = false; invQ(hotbarN)}
+
+	if (invOpen == false) {
 		if (food >= 0) {food-=0.005} else {health-=0.02}
 		if (health <= 0) {
 			msg("Вы погибли и все ваши вещи пропадут","Однако мир будет сохранён со всеми","вашими постройками в нём");
@@ -53,7 +56,7 @@ function worldMath() {
 }
 
 function invMath() {
-	if (openInv == true && lockInv == false) {
+	if (invOpen == true && lockInv == false) {
 		if (invRel > 0) {invRel--}
 		if (craftOpen == false) {
 			if (keyw == true && invRel == 0 && invN > 9) {invN-=10; invRel = 9}
@@ -67,7 +70,6 @@ function invMath() {
 			}
 			if (keyd == true && invRel == 0 && invN != 9 && invN != 19 && invN != 29) {invN++; invRel = 9}
 			if (keyq == true) {keyq = false; invQ(invN)}
-			if (keyf == true) {keyf = false; useItem()}
 		} else {
 			if (keyw == true && invRel == 0) {
 				craftN-=3; invRel = 9; 

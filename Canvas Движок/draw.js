@@ -1,7 +1,7 @@
 function draw() {
 	ctx.fillStyle = "black"; ctx.fillRect(0,0,canv.width,canv.height);
 
-	if (openInv == false) { // WORLD
+	if (invOpen == false) { // WORLD
 		for (let i = 0; i < obj.length; i++) {
 			if (obj[i].x < x+11 && obj[i].x > x-1) {
 				if (obj[i].y > y-1 && obj[i].y < y+7) {
@@ -33,7 +33,7 @@ function draw() {
 		ctx.strokeStyle = "rgb(0,0,0)"; ctx.strokeRect(hotbarN*50+300,640,50,50); ctx.strokeRect(hotbarN*50+301,641,48,48);
 	}
 
-	if (openInv == true) { // INVENTORY
+	if (invOpen == true) { // INVENTORY
 		ctx.fillStyle = "rgb(77,77,155)"; ctx.fillRect(0,0,canv.width,canv.height);
 
 		let step = 0;

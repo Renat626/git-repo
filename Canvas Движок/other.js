@@ -2,17 +2,32 @@ function loadFunc() {
 	ctx.fillStyle = "green"; ctx.fillRect(500,280,100,20); ctx.fillStyle = "lime"; ctx.fillRect(500,280,load,20); load+=loadStep;
 	if (load == 100) {
 		lockMove=false; lockSpace=false; lockInv=false;
-		if (obj[curObj].id == "tree") {obj[curObj].id=""}
+		if (obj[curObj].id == "tree") {obj[curObj].id=""; invAdd("wood", 1)}
 		if (obj[curObj].id == "bluebush") {obj[curObj].id="bush"; invAdd("blueberry", 1); let a=curObj; setTimeout(function(){obj[a].id="bluebush"},30000)}
 		if (obj[curObj].id == "redbush") {obj[curObj].id="bush"; invAdd("redberry", 1); let a=curObj; setTimeout(function(){obj[a].id="redbush"},30000)}
+		if (obj[curObj].id == "stone") {obj[curObj].id=""; invAdd("stone", 1)}
 	}
 }
+function action(i) {
+	if (obj[i].id == "tree" || obj[i].id == "bluebush" || obj[i].id == "redbush") {loadStep=itemsStep(obj[i].id); reload(i)}
+	
+	if (obj[i].id == "stone") {
+		if (inv[hotbarN].id == "woodenPickaxe") {loadStep = 0.25; reload(i)}
+		if (inv[hotbarN].id == "stonePickaxe") {loadStep = 0.5; reload(i)}
+		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 1; reload(i)}
+		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 2; reload(i)}
+	}
+}
+function itemsStep(id) {
+	if (id == "tree") {return 0.5}
+	if (id == "bluebush" || id == "redbush") {return 2.5}
+}
+function reload(i) {load=0;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
 
 
 function useItem() {
-	if (craftOpen == false) {
-		if (inv[invN].id == "blueberry" && food+5 < 100 || inv[invN].id == "redberry" && food+5 < 100) {food+=5; inv[invN].n--; if (inv[invN].n == 0) {inv[invN].id = ""}}
-	}
+	let n = -1; if (craftOpen == false && invOpen == true) {n = invN} else if (invOpen == false) {n = hotbarN}
+	if (inv[n].id == "blueberry" && food+5 < 100 || inv[n].id == "redberry" && food+5 < 100) {food+=5; inv[n].n--; if (inv[n].n == 0) {inv[n].id = ""}}
 }
 
 
@@ -30,12 +45,7 @@ function invAdd(id, n) {
 		msg("","Инвентарь заполнен, освободите место","");
 	}
 }
-function invQ(n) {
-	inv[n].n--; keyq = false;
-	if (inv[n].n == 0) {
-		inv[n].id == ""; for (let i = n; i < 30; i++) {inv[i].n = inv[i+1].n; inv[i].id = inv[i+1].id; inv[i].m = inv[i+1].m}
-	}
-}
+function invQ(n) {inv[n].n--; if (inv[n].n == 0) {inv[n].id = ""}}
 
 
 function craftSpace() {
@@ -99,10 +109,6 @@ function recipe(el1,el2,el3,el4,el5,el6,el7,el8,el9) {
 }
 
 
-function action(i) {
-	if (obj[i].id == "tree") {load=0;loadStep=0.5;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
-	if (obj[i].id == "bluebush" || obj[i].id == "redbush") {load=0;loadStep=2.5;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
-}
 function pickup() {
 	if (obj[pi()].id == "stick1" || obj[pi()].id == "stick2") {obj[pi()].id = ""; invAdd("stick1", 1)}
 }

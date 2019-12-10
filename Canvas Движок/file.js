@@ -4,7 +4,7 @@
 
 	mapWidth = 20; mapHeight = 20;
 
-	keyw=keya=keys=keyd=keye=keyq=keyf=keyr=key1=key2=key3=key4=key5=key6=key7=key8=key9=key0=space=going=lockMove=lockSpace=lockInv=openInv=openMsg=craftOpen=false;
+	keyw=keya=keys=keyd=keye=keyq=keyf=keyr=key1=key2=key3=key4=key5=key6=key7=key8=key9=key0=space=going=lockMove=lockSpace=lockInv=invOpen=openMsg=craftOpen=false;
 	x=y=getx=gety=invN=craftN=invRel=hotbarN=loadStep=0; load=food=health=100; textMsg1=textMsg2=textMsg3="";
 	side = "playerS"; curObj = {}; invCut = {id:"", n:0, m:0}; obj=[]; inv=[]; craft=[]; images=[]; toolN = -1;
 	for (let i = 30; i >= 0; i--) {inv.push({id:"", n:1, m:64})}; for (let i = 8; i >= 0; i--) {craft.push({id:"", n:1, m:0})}
