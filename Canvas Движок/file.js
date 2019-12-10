@@ -4,16 +4,35 @@
 
 	mapWidth = 20; mapHeight = 20;
 
-	keyw=keya=keys=keyd=keye=keyq=keyf=keyr=key1=key2=key3=key4=key5=key6=key7=key8=key9=space=going=lockMove=lockSpace=lockInv=openInv=openMsg=craftOpen=false;
-	x=y=getx=gety=mx=my=invN=craftN=invRel=0; load = 100; loadStep = 1; textMsg1=textMsg2=textMsg3="";
-	side = "S"; curObj = {}; obj=[]; inv=[]; craft=[]; toolN = -1;
-	for (let i = 30; i >= 0; i--) {inv.push({id:"", n:0, m:64})}; for (let i = 8; i >= 0; i--) {craft.push({id:"", n:0})}
+	keyw=keya=keys=keyd=keye=keyq=keyf=keyr=key1=key2=key3=key4=key5=key6=key7=key8=key9=key0=space=going=lockMove=lockSpace=lockInv=openInv=openMsg=craftOpen=false;
+	x=y=getx=gety=invN=craftN=invRel=hotbarN=loadStep=0; load=food=health=100; textMsg1=textMsg2=textMsg3="";
+	side = "playerS"; curObj = {}; invCut = {id:"", n:0, m:0}; obj=[]; inv=[]; craft=[]; images=[]; toolN = -1;
+	for (let i = 30; i >= 0; i--) {inv.push({id:"", n:1, m:64})}; for (let i = 8; i >= 0; i--) {craft.push({id:"", n:1, m:0})}
 
+	preload();
 	generation();
 	draw();
 
-	setInterval(function() {game()}, 1000/30);
+	setInterval(function() {game()}, 1000/60);
 }
+
+function preload() {
+	let id = ""; 
+	for (let i = 0; i < 30; i++) {
+		if (i == 0) {id = "grass"}; if (i == 1) {id = "tree"}; if (i == 2) {id = "bluebush"}
+		if (i == 3) {id = "redbush"}; if (i == 4) {id = "stone"}; if (i == 5) {id = "bush"}
+		if (i == 6) {id = "playerW"}; if (i == 7) {id = "playerA"}; if (i == 8) {id = "playerS"}
+		if (i == 9) {id = "playerD"}; if (i == 10) {id = "blueberry"}; if (i == 11) {id = "redberry"}
+		if (i == 12) {id = "stick1"}; if (i == 13) {id = "stick2"}; if (i == 14) {id = "wood"}
+		if (i == 15) {id = "woodenPickaxe"}; if (i == 16) {id = "woodenAxe"}; if (i == 17) {id = "caveHole"}
+		if (i == 18) {id = "caveUp"}; if (i == 19) {id = "coal"}; if (i == 20) {id = "coalOre"}
+		if (i == 21) {id = "food"}; if (i == 22) {id = "heart"}; if (i == 23) {id = "darkFood"}
+		if (i == 24) {id = "darkHeart"}; if (i == 25) {id = "error"}; if (i == 26) {id = "furnaceOn"}
+		if (i == 27) {id = "furnaceOff"}; if (i == 28) {id = "halfFood"}; if (i == 29) {id = "halfHeart"}
+		drawImg = new Image(); drawImg.src = "img/"+id+".png"; images.push({id:id, img:drawImg});
+	}
+}
+
 
 function generation() {
 	let i2 = 0;
@@ -64,6 +83,7 @@ onkeydown = function(e) {
 	if (e.which == 55) {key7=true}
 	if (e.which == 56) {key8=true}
 	if (e.which == 57) {key9=true}
+	if (e.which == 48) {key0=true}
 }
 
 onkeyup = function(e) {
@@ -86,4 +106,5 @@ onkeyup = function(e) {
 	if (e.which == 55) {key7=false}
 	if (e.which == 56) {key8=false}
 	if (e.which == 57) {key9=false}
+	if (e.which == 48) {key0=false}
 }

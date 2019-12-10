@@ -9,6 +9,13 @@ function loadFunc() {
 }
 
 
+function useItem() {
+	if (craftOpen == false) {
+		if (inv[invN].id == "blueberry" && food+5 < 100 || inv[invN].id == "redberry" && food+5 < 100) {food+=5; inv[invN].n--; if (inv[invN].n == 0) {inv[invN].id = ""}}
+	}
+}
+
+
 function invAdd(id, n) {
 	canPlus=canNew=false;
 	for (let i = 29; i >= 0; i--) {
@@ -32,15 +39,39 @@ function invQ(n) {
 
 
 function craftSpace() {
-	if (craftOpen == false) {craftOpen = true}
-	else if (craftOpen == true) {
-		craftOpen = false;
-		if (inv[invN].id != "") {invAdd(craft[craftN].id, 1); craft[craftN].id = inv[invN].id; invQ(invN)}
+	if (craftOpen == false) {
+		if (invCut.id == "") {
+			invCut.id = inv[invN].id; invCut.n = inv[invN].n; invCut.m = inv[invN].m;
+			inv[invN].id = ""; inv[invN].n = 0; inv[invN].m = 64;
+		}
+		else if (inv[invN].id == invCut.id) {
+			inv[invN].n++; invCut.n--; if (invCut.n == 0) {invCut.id = ""}
+		}
+		else if (inv[invN].id != "") {
+			let asd = {id:"", n:0, m:0}; asd.id = inv[invN].id; asd.n = inv[invN].n; asd.m = inv[invN].m;
+			inv[invN].id = invCut.id; inv[invN].n = invCut.n; inv[invN].m = invCut.m;
+			invCut.id = asd.id; invCut.n = asd.n; invCut.m = asd.m;
+		}
+		else {inv[invN].id = invCut.id; inv[invN].n = invCut.n; inv[invN].m = invCut.m; invCut.id = ""}
+	} else {
+		if (invCut.id == "") {
+			invCut.id = craft[craftN].id; invCut.n = craft[craftN].n; invCut.m = craft[craftN].m;
+			craft[craftN].id = ""; craft[craftN].n = 0; craft[craftN].m = 64;
+		}
+		else if (craft[craftN].id == invCut.id) {
+			craft[craftN].n++; invCut.n--; if (invCut.n == 0) {invCut.id = ""}
+		}
+		else if (craft[craftN].id != "") {
+			let asd = {id:"", n:0, m:0}; asd.id = craft[craftN].id; asd.n = craft[craftN].n; asd.m = craft[craftN].m;
+			craft[craftN].id = invCut.id; craft[craftN].n = invCut.n; craft[craftN].m = invCut.m;
+			invCut.id = asd.id; invCut.n = asd.n; invCut.m = asd.m;
+		}
+		else {craft[craftN].id = invCut.id; craft[craftN].n = 1; craft[craftN].m = invCut.m; invCut.n--; if (invCut.n == 0) {invCut.id = ""}}
 	}
 }
 function craftDo() {
 	id = craftCheck(true).id; n = craftCheck(true).n;
-	if (id != "") {for (let i = craft.length - 1; i >= 0; i--) {craft[i].id = ""}; invAdd(id, n)}
+	if (id != "") {for (let i = craft.length - 1; i >= 0; i--) {craft[i].n--; if (craft[i].n == 0) {craft[i].id = ""}}; invAdd(id, n)}
 }
 function craftCheck(give) {
 	id = ""; n = 1; // if (recipe("","","","","","","","","") == true) {id = ""; n = 1}
@@ -54,36 +85,28 @@ function craftCheck(give) {
 	if (recipe("","","","","","","wood","","") == true) {id = "stick1"; n = 4}
 	if (recipe("","","","","","","","wood","") == true) {id = "stick1"; n = 4}
 	if (recipe("","","","","","","","","wood") == true) {id = "stick1"; n = 4}
-	if (id != "") {ctx.drawImage(img(id),925,446,130,130)}
+	if (id != "") {
+		ctx.drawImage(img(id),925,446,130,130);
+		ctx.fillStyle = "white"; ctx.font = "32px serif";
+		if (n > 9 && n < 100) {ctx.fillText(n,1018,571)}
+		else if (n != 1) {ctx.fillText(n,1035,571)}
+	}
 	if (give == true) {return {id:id, n:n}};
 }
 function recipe(el1,el2,el3,el4,el5,el6,el7,el8,el9) {
 	if (craft[0].id == el1 && craft[1].id == el2 && craft[2].id == el3 && craft[3].id == el4 && craft[4].id == el5 && craft[5].id == el6 && craft[6].id == el7 && craft[7].id == el8 && craft[8].id == el9) {return true}
-	return false
+	return false;
 }
 
 
 function action(i) {
-	if (obj[i].id == "tree") {load=0;loadStep=1;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
-	if (obj[i].id == "bluebush" || obj[i].id == "redbush") {load=0;loadStep=5;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
+	if (obj[i].id == "tree") {load=0;loadStep=0.5;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
+	if (obj[i].id == "bluebush" || obj[i].id == "redbush") {load=0;loadStep=2.5;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
 }
 function pickup() {
 	if (obj[pi()].id == "stick1" || obj[pi()].id == "stick2") {obj[pi()].id = ""; invAdd("stick1", 1)}
 }
-
-function tool(id) {
-	if (id == "woodenPickaxe") {return true}
-	return false;
-}
-function img(id) {
-	let path = "img/"+id+".png";
-	if (id == "W") {path = "img/playerW.png"}
-	if (id == "A") {path = "img/playerA.png"}
-	if (id == "S") {path = "img/playerS.png"}
-	if (id == "D") {path = "img/playerD.png"}
-		
-	drawImg = new Image(); drawImg.src = path; return drawImg;
-}
+function img(id) {for (let i = images.length - 1; i >= 0; i--) {if (images[i].id == id) {return images[i].img}}}
 function name(id) {
 	if (id == "blueberry") {return "Синяя ягода"}
 	if (id == "redberry") {return "Красная ягода"}
@@ -103,10 +126,10 @@ function solid(id) {
 }
 
 function go() {
-	if (x < getx) {x+=0.1} else if (x > getx) {x-=0.1}; if (y < gety) {y+=0.1} else if (y > gety) {y-=0.1}
+	if (x < getx) {x+=0.05} else if (x > getx) {x-=0.05}; if (y < gety) {y+=0.05} else if (y > gety) {y-=0.05}
 	
-	if (Math.abs(x)-Math.abs(getx) < 0.1 && Math.abs(x)-Math.abs(getx) > 0) {x=getx}
-	if (Math.abs(y)-Math.abs(gety) < 0.1 && Math.abs(y)-Math.abs(gety) > 0) {y=gety}
+	if (Math.abs(x)-Math.abs(getx) < 0.05 && Math.abs(x)-Math.abs(getx) > 0) {x=getx}
+	if (Math.abs(y)-Math.abs(gety) < 0.05 && Math.abs(y)-Math.abs(gety) > 0) {y=gety}
 
 	if (x == getx && y == gety) {going=false; pickup()}
 }
