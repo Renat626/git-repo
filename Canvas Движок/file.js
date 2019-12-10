@@ -18,7 +18,7 @@
 
 function preload() {
 	let id = ""; 
-	for (let i = 0; i < 30; i++) {
+	for (let i = 0; i < 36; i++) {
 		if (i == 0) {id = "grass"}; if (i == 1) {id = "tree"}; if (i == 2) {id = "bluebush"}
 		if (i == 3) {id = "redbush"}; if (i == 4) {id = "stone"}; if (i == 5) {id = "bush"}
 		if (i == 6) {id = "playerW"}; if (i == 7) {id = "playerA"}; if (i == 8) {id = "playerS"}
@@ -29,6 +29,8 @@ function preload() {
 		if (i == 21) {id = "food"}; if (i == 22) {id = "heart"}; if (i == 23) {id = "darkFood"}
 		if (i == 24) {id = "darkHeart"}; if (i == 25) {id = "error"}; if (i == 26) {id = "furnaceOn"}
 		if (i == 27) {id = "furnaceOff"}; if (i == 28) {id = "halfFood"}; if (i == 29) {id = "halfHeart"}
+		if (i == 30) {id = "stonePickaxe"}; if (i == 31) {id = "ironPickaxe"}; if (i == 32) {id = "goldPickaxe"}
+		if (i == 33) {id = "stoneAxe"}; if (i == 34) {id = "ironAxe"}; if (i == 35) {id = "goldAxe"};
 		drawImg = new Image(); drawImg.src = "img/"+id+".png"; images.push({id:id, img:drawImg});
 	}
 }

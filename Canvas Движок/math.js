@@ -30,7 +30,7 @@ function worldMath() {
 		if (invOpen == false) {lockSpace = false; lockMove = false}
 		space = false; openMsg = false; lockInv = false;
 	}
-
+	
 	if (key1 == true) {key1 = false; hotbarN = 0}
 	if (key2 == true) {key2 = false; hotbarN = 1}
 	if (key3 == true) {key3 = false; hotbarN = 2}

@@ -1,6 +1,6 @@
 function loadFunc() {
 	ctx.fillStyle = "green"; ctx.fillRect(500,280,100,20); ctx.fillStyle = "lime"; ctx.fillRect(500,280,load,20); load+=loadStep;
-	if (load == 100) {
+	if (load >= 100) {
 		lockMove=false; lockSpace=false; lockInv=false;
 		if (obj[curObj].id == "tree") {obj[curObj].id=""; invAdd("wood", 1)}
 		if (obj[curObj].id == "bluebush") {obj[curObj].id="bush"; invAdd("blueberry", 1); let a=curObj; setTimeout(function(){obj[a].id="bluebush"},30000)}
@@ -9,7 +9,7 @@ function loadFunc() {
 	}
 }
 function action(i) {
-	if (obj[i].id == "tree" || obj[i].id == "bluebush" || obj[i].id == "redbush") {loadStep=itemsStep(obj[i].id); reload(i)}
+	if (obj[i].id == "bluebush" || obj[i].id == "redbush") {loadStep=itemsStep(obj[i].id); reload(i)}
 	
 	if (obj[i].id == "stone") {
 		if (inv[hotbarN].id == "woodenPickaxe") {loadStep = 0.25; reload(i)}
@@ -17,9 +17,17 @@ function action(i) {
 		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 1; reload(i)}
 		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 2; reload(i)}
 	}
+
+	if (obj[i].id == "tree") {
+		let asd = false;
+		if (inv[hotbarN].id == "woodenAxe") {loadStep = 1; reload(i); asd = true}
+		if (inv[hotbarN].id == "stoneAxe") {loadStep = 1.5; reload(i); asd = true}
+		if (inv[hotbarN].id == "ironAxe") {loadStep = 2.5; reload(i); asd = true}
+		if (inv[hotbarN].id == "goldAxe") {loadStep = 3; reload(i); asd = true}
+		if (asd == false) {loadStep = 0.5; reload(i)}
+	}
 }
 function itemsStep(id) {
-	if (id == "tree") {return 0.5}
 	if (id == "bluebush" || id == "redbush") {return 2.5}
 }
 function reload(i) {load=0;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
@@ -86,6 +94,9 @@ function craftDo() {
 function craftCheck(give) {
 	id = ""; n = 1; // if (recipe("","","","","","","","","") == true) {id = ""; n = 1}
 	if (recipe("wood","wood","wood","","stick1","","","stick1","") == true) {id = "woodenPickaxe"}
+	if (recipe("stone","stone","stone","","stick1","","","stick1","") == true) {id = "stonePickaxe"}
+	if (recipe("wood","wood","","wood","stick1","","","stick1","") == true) {id = "woodenAxe"}
+	if (recipe("stone","stone","","stone","stick1","","","stick1","") == true) {id = "stoneAxe"}
 	if (recipe("wood","","","","","","","","") == true) {id = "stick1"; n = 4}
 	if (recipe("","wood","","","","","","","") == true) {id = "stick1"; n = 4}
 	if (recipe("","","wood","","","","","","") == true) {id = "stick1"; n = 4}
