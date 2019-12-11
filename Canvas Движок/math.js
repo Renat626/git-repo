@@ -1,16 +1,21 @@
 function worldMath() {
 	if (lockMove == false) {
-		if (keyw == true && keys == false && going == false) {side = "playerW"; let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()-mapWidth == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;gety=y-1;getx=x}}
-		if (keya == true && keyd == false && going == false) {side = "playerA"; let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()-1 == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;getx=x-1;gety=y}}
-		if (keys == true && keyw == false && going == false) {side = "playerS"; let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()+mapWidth == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;gety=y+1;getx=x}}
-		if (keyd == true && keya == false && going == false) {side = "playerD"; let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()+1 == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;getx=x+1;gety=y}}
+		if (shift == true && keyw == true && keys == false && going == false) {side = "playerW"}
+		if (shift == true && keya == true && keyd == false && going == false) {side = "playerA"}
+		if (shift == true && keys == true && keyw == false && going == false) {side = "playerS"}
+		if (shift == true && keyd == true && keya == false && going == false) {side = "playerD"}
+
+		if (keyw == true && keys == false && going == false && y+3 != 0) {side = "playerW"; if (shift == false) {let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()-mapWidth == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;gety=y-1;getx=x}}}
+		if (keya == true && keyd == false && going == false && x+5 != 0) {side = "playerA"; if (shift == false) {let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()-1 == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;getx=x-1;gety=y}}}
+		if (keys == true && keyw == false && going == false && y+3 != mapHeight-1) {side = "playerS"; if (shift == false) {let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()+mapWidth == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;gety=y+1;getx=x}}}
+		if (keyd == true && keya == false && going == false && x+5 != mapWidth-1) {side = "playerD"; if (shift == false) {let canGo = true;for (let i = 0; i < obj.length; i++) {if (pi()+1 == i && solid(obj[i].id) == true) {canGo = false}}; if (canGo) {going=true;getx=x+1;gety=y}}}
 	}
 	if (lockSpace == false) {
 		if (space == true && y+3 >= 0 && y+3 <= mapHeight && x+5 >= 0 && x+5 <= mapWidth) {
 			if (side == "playerW" && going == false && y+3 != 0) {action(pi()-mapWidth)}
 			if (side == "playerA" && going == false && x+5 != 0) {action(pi()-1)}
-			if (side == "playerS" && going == false && y+3 != mapHeight) {action(pi()+mapWidth)}
-			if (side == "playerD" && going == false && x+5 != mapWidth) {action(pi()+1)}
+			if (side == "playerS" && going == false && y+3 != mapHeight-1) {action(pi()+mapWidth)}
+			if (side == "playerD" && going == false && x+5 != mapWidth-1) {action(pi()+1)}
 			space = false;
 		}
 	}
@@ -20,7 +25,7 @@ function worldMath() {
 			else {
 				invOpen = false; lockSpace = false; lockMove = false;
 				for (let i = craft.length - 1; i >= 0; i--) {invAdd(craft[i].id, craft[i].n); craft[i].id = ""}
-				if (invCut.id != "") {invAdd(invCut.id, invCut.n); invCut.id=""}
+				if (invCut.id != "") {invAdd(invCut.id, invCut.n); invCut.id=""}; furnace = "";
 			}
 			keye = false;
 		}
@@ -30,7 +35,7 @@ function worldMath() {
 		if (invOpen == false) {lockSpace = false; lockMove = false}
 		space = false; openMsg = false; lockInv = false;
 	}
-	
+
 	if (key1 == true) {key1 = false; hotbarN = 0}
 	if (key2 == true) {key2 = false; hotbarN = 1}
 	if (key3 == true) {key3 = false; hotbarN = 2}
@@ -46,7 +51,7 @@ function worldMath() {
 	if (keyq == true && invOpen	== false) {keyq = false; invQ(hotbarN)}
 
 	if (invOpen == false) {
-		if (food >= 0) {food-=0.005} else {health-=0.02}
+		if (food >= 0) {food-=0.002; if (going == true) {food-=0.003}} else {health-=0.02}
 		if (health <= 0) {
 			msg("Вы погибли и все ваши вещи пропадут","Однако мир будет сохранён со всеми","вашими постройками в нём");
 			health = 100; food = 100; for (let i = inv.length - 1; i >= 0; i--) {inv[i].id=  ""}; invCut.id = "";

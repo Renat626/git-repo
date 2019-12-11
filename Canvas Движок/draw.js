@@ -5,8 +5,20 @@ function draw() {
 		for (let i = 0; i < obj.length; i++) {
 			if (obj[i].x < x+11 && obj[i].x > x-1) {
 				if (obj[i].y > y-1 && obj[i].y < y+7) {
-					ctx.drawImage(img("grass"),(obj[i].x-x)*100,(obj[i].y-y)*100,100,100);
+					if (world == 0) {ctx.drawImage(img("grass"),(obj[i].x-x)*100,(obj[i].y-y)*100,100,100)}
+					else {ctx.drawImage(img("stoneFloor"),(obj[i].x-x)*100,(obj[i].y-y)*100,100,100)}
 					if (obj[i].id != "") {ctx.drawImage(img(obj[i].id),(obj[i].x-x)*100,(obj[i].y-y)*100,100,100)}
+
+					if (obj[i].id == "furnaceOff" || obj[i].id == "furnaceOn") {
+						if (obj[i].rel > 0 && obj[i].fuel > 0) {obj[i].rel--; obj[i].fuel--; if (obj[i].id = "furnaceOff") {obj[i].id = "furnaceOn"}} else {obj[i].id = "furnaceOff"}
+						if (obj[i].rel == 0 && obj[i].item != "" && obj[i].n > 0) {
+							obj[i].n--; obj[i].good++;
+							if (obj[i].n > 0) {
+								if (obj[i].item == "ironOre") {obj[i].rel = 200}
+								if (obj[i].item == "goldOre") {obj[i].rel = 300}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -19,7 +31,8 @@ function draw() {
 			if (health >= i*10+5) {ctx.drawImage(img("heart"),i*25+300,610,25,25)} else if (health >= i*10) {ctx.drawImage(img("halfHeart"),i*25+300,610,25,25)} else {ctx.drawImage(img("darkHeart"),i*25+300,610,25,25)}
 			
 			if (food >= i*10+5) {ctx.drawImage(img("food"),i*25+550,610,25,25)} else if (food >= i*10) {ctx.drawImage(img("halfFood"),i*25+550,610,25,25)} else {ctx.drawImage(img("darkFood"),i*25+550,610,25,25);}
-			ctx.fillStyle = "rgb(99,99,99)"; ctx.fillRect(i*50+300,640,50,50);
+			
+			ctx.fillStyle = "rgb(155,155,155)"; ctx.fillRect(i*50+300,640,50,50);
 			
 			if (inv[i].id != "") {
 				ctx.drawImage(img(inv[i].id),i*50+300,640,50,50);
@@ -28,7 +41,7 @@ function draw() {
 				else if (inv[i].n != 1) {ctx.fillText(inv[i].n,i*50+338,685)}
 			}
 			
-			ctx.strokeStyle = "rgb(200,200,200)"; ctx.strokeRect(i*50+300,640,50,50); ctx.strokeRect(i*50+301,641,48,48);
+			ctx.strokeStyle = "rgb(222,222,222)"; ctx.strokeRect(i*50+300,640,50,50); ctx.strokeRect(i*50+301,641,48,48);
 		}
 		ctx.strokeStyle = "rgb(0,0,0)"; ctx.strokeRect(hotbarN*50+300,640,50,50); ctx.strokeRect(hotbarN*50+301,641,48,48);
 	}

@@ -3,18 +3,39 @@ function loadFunc() {
 	if (load >= 100) {
 		lockMove=false; lockSpace=false; lockInv=false;
 		if (obj[curObj].id == "tree") {obj[curObj].id=""; invAdd("wood", 1)}
-		if (obj[curObj].id == "bluebush") {obj[curObj].id="bush"; invAdd("blueberry", 1); let a=curObj; setTimeout(function(){obj[a].id="bluebush"},30000)}
-		if (obj[curObj].id == "redbush") {obj[curObj].id="bush"; invAdd("redberry", 1); let a=curObj; setTimeout(function(){obj[a].id="redbush"},30000)}
+		if (obj[curObj].id == "bluebush") {obj[curObj].id="bush"; invAdd("blueberry", 1); let a=curObj; setTimeout(function(){if (world == 0) {obj[a].id="bluebush"} else {real[a].id="bluebush"}},30000)}
+		if (obj[curObj].id == "redbush") {obj[curObj].id="bush"; invAdd("redberry", 1); let a=curObj; setTimeout(function(){if (world == 0) {obj[a].id="redbush"} else {real[a].id="redbush"}},30000)}
 		if (obj[curObj].id == "stone") {obj[curObj].id=""; invAdd("stone", 1)}
+		if (obj[curObj].id == "coalOre") {obj[curObj].id=""; invAdd("coal", 1)}
+		if (obj[curObj].id == "ironOre") {obj[curObj].id=""; invAdd("ironOre", 1)}
+		if (obj[curObj].id == "goldOre") {obj[curObj].id=""; invAdd("goldOre", 1)}
 	}
 }
 function action(i) {
 	if (obj[i].id == "bluebush" || obj[i].id == "redbush") {loadStep=itemsStep(obj[i].id); reload(i)}
 	
 	if (obj[i].id == "stone") {
-		if (inv[hotbarN].id == "woodenPickaxe") {loadStep = 0.25; reload(i)}
+		if (inv[hotbarN].id == "woodenPickaxe") {loadStep = 0.3; reload(i)}
 		if (inv[hotbarN].id == "stonePickaxe") {loadStep = 0.5; reload(i)}
 		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 1; reload(i)}
+		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 2; reload(i)}
+	}
+
+	if (obj[i].id == "coalOre") {
+		if (inv[hotbarN].id == "woodenPickaxe") {loadStep = 0.19; reload(i)}
+		if (inv[hotbarN].id == "stonePickaxe") {loadStep = 0.35; reload(i)}
+		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 0.8; reload(i)}
+		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 1.5; reload(i)}
+	}
+
+	if (obj[i].id == "ironOre") {
+		if (inv[hotbarN].id == "stonePickaxe") {loadStep = 0.3; reload(i)}
+		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 0.8; reload(i)}
+		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 1.5; reload(i)}
+	}
+
+	if (obj[i].id == "goldOre") {
+		if (inv[hotbarN].id == "ironPickaxe") {loadStep = 0.7; reload(i)}
 		if (inv[hotbarN].id == "goldPickaxe") {loadStep = 2; reload(i)}
 	}
 
@@ -26,6 +47,9 @@ function action(i) {
 		if (inv[hotbarN].id == "goldAxe") {loadStep = 3; reload(i); asd = true}
 		if (asd == false) {loadStep = 0.5; reload(i)}
 	}
+
+	if (obj[i].id == "caveUp") {world--; worldChange(false); return}
+	if (obj[i].id == "caveHole") {world++; worldChange(true); return}
 }
 function itemsStep(id) {
 	if (id == "bluebush" || id == "redbush") {return 2.5}
@@ -34,8 +58,33 @@ function reload(i) {load=0;lockMove=true;lockSpace=true;lockInv=true;curObj=i}
 
 
 function useItem() {
-	let n = -1; if (craftOpen == false && invOpen == true) {n = invN} else if (invOpen == false) {n = hotbarN}
+	let n = -1, asd = ""; if (craftOpen == false && invOpen == true) {n = invN} else if (invOpen == false) {n = hotbarN}
+	
 	if (inv[n].id == "blueberry" && food+5 < 100 || inv[n].id == "redberry" && food+5 < 100) {food+=5; inv[n].n--; if (inv[n].n == 0) {inv[n].id = ""}}
+	
+	if (interact("furnaceOff") != false || interact("furnaceOn") != false) {
+		if (interact("furnaceOff") != false) {asd = interact("furnaceOff")} else {asd = interact("furnaceOn")}
+		if (inv[hotbarN].id == "coal") {obj[asd].fuel+=400; invQ(hotbarN)}
+		
+		if (inv[hotbarN].id == "ironOre" && obj[asd].item == "" && obj[asd].good == 0) {obj[asd].item = "ironOre"; obj[asd].rel = 200}
+		if (inv[hotbarN].id == "ironOre" && obj[asd].item == "ironOre") {obj[asd].n++; invQ(hotbarN)}
+		if (inv[hotbarN].id != obj[asd].item && obj[asd].good > 0 && obj[asd].item == "ironOre") {invAdd("ironIngot", obj[asd].good); obj[asd].good = 0}
+
+		if (inv[hotbarN].id == "goldOre" && obj[asd].item == "" && obj[asd].good == 0) {obj[asd].item = "goldOre"; obj[asd].rel = 300}
+		if (inv[hotbarN].id == "goldOre" && obj[asd].item == "goldOre") {obj[asd].n++; invQ(hotbarN)}
+		if (inv[hotbarN].id != obj[asd].item && obj[asd].good > 0 && obj[asd].item == "goldOre") {invAdd("goldIngot", obj[asd].good); obj[asd].good = 0}
+
+		if (shift == true) {alert(obj[asd].item + " " + obj[asd].n + " " + obj[asd].fuel + " " + obj[asd].good + " " + obj[asd].rel)}
+	}
+	
+	if (inv[n].id == "furnaceOff") {asd = interact(""); if (asd != false) {obj[asd].id = "furnaceOff"; obj[asd].rel = 0; obj[asd].item = ""; obj[asd].fuel = 0; obj[asd].n = 0; obj[asd].good = 0; invQ(hotbarN)}}
+}
+function interact(id) {
+	if (side == "playerW" && going == false && y+3 != 0 && obj[pi()-mapWidth].id == id) {return pi()-mapWidth}
+	if (side == "playerA" && going == false && x+5 != 0 && obj[pi()-1].id == id) {return pi()-1}
+	if (side == "playerS" && going == false && y+3 != mapHeight-1 && obj[pi()+mapWidth].id == id) {return pi()+mapWidth}
+	if (side == "playerD" && going == false && x+5 != mapWidth-1 && obj[pi()+1].id == id) {return pi()+1}
+	return false;
 }
 
 
@@ -93,24 +142,22 @@ function craftDo() {
 }
 function craftCheck(give) {
 	id = ""; n = 1; // if (recipe("","","","","","","","","") == true) {id = ""; n = 1}
+	if (recipe("stone","stone","stone","stone","","stone","stone","stone","stone") == true) {id = "furnaceOff"; n = 1}
 	if (recipe("wood","wood","wood","","stick1","","","stick1","") == true) {id = "woodenPickaxe"}
 	if (recipe("stone","stone","stone","","stick1","","","stick1","") == true) {id = "stonePickaxe"}
+	if (recipe("ironIngot","ironIngot","ironIngot","","stick1","","","stick1","") == true) {id = "ironPickaxe"}
+	if (recipe("goldIngot","goldIngot","goldIngot","","stick1","","","stick1","") == true) {id = "goldPickaxe"}
 	if (recipe("wood","wood","","wood","stick1","","","stick1","") == true) {id = "woodenAxe"}
 	if (recipe("stone","stone","","stone","stick1","","","stick1","") == true) {id = "stoneAxe"}
-	if (recipe("wood","","","","","","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","wood","","","","","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","wood","","","","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","wood","","","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","","wood","","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","","","wood","","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","","","","wood","","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","","","","","wood","") == true) {id = "stick1"; n = 4}
-	if (recipe("","","","","","","","","wood") == true) {id = "stick1"; n = 4}
+	if (recipe("ironIngot","ironIngot","","ironIngot","stick1","","","stick1","") == true) {id = "ironAxe"}
+	if (recipe("goldIngot","goldIngot","","goldIngot","stick1","","","stick1","") == true) {id = "goldAxe"}
+	if (recipe("wood","","","","","","","","") == true || recipe("","wood","","","","","","","") == true || recipe("","","wood","","","","","","") == true) {id = "stick1"; n = 4}
+	if (recipe("","","","wood","","","","","") == true || recipe("","","","","wood","","","","") == true || recipe("","","","","","wood","","","") == true) {id = "stick1"; n = 4}
+	if (recipe("","","","","","","wood","","") == true || recipe("","","","","","","","wood","") == true || recipe("","","","","","","","","wood") == true) {id = "stick1"; n = 4}
+
 	if (id != "") {
-		ctx.drawImage(img(id),925,446,130,130);
-		ctx.fillStyle = "white"; ctx.font = "32px serif";
-		if (n > 9 && n < 100) {ctx.fillText(n,1018,571)}
-		else if (n != 1) {ctx.fillText(n,1035,571)}
+		ctx.drawImage(img(id),925,446,130,130); ctx.fillStyle = "white"; ctx.font = "32px serif";
+		if (n > 9 && n < 100) {ctx.fillText(n,1018,571)} else if (n != 1) {ctx.fillText(n,1035,571)}
 	}
 	if (give == true) {return {id:id, n:n}};
 }
@@ -125,11 +172,12 @@ function pickup() {
 }
 function img(id) {for (let i = images.length - 1; i >= 0; i--) {if (images[i].id == id) {return images[i].img}}}
 function name(id) {
-	if (id == "blueberry") {return "Синяя ягода"}
-	if (id == "redberry") {return "Красная ягода"}
-	if (id == "wood") {return "Древесина"}
-	if (id == "stone") {return "Камень"}
-	if (id == "stick1") {return "Палка"}
+	if (id == "blueberry") {return "Синяя ягода"}; if (id == "redberry") {return "Красная ягода"}; if (id == "wood") {return "Древесина"}
+	if (id == "stone") {return "Камень"}; if (id == "stick1") {return "Палка"}; if (id == "woodenPickaxe") {return "Деревянная кирка"}
+	if (id == "woodenAxe") {return "Деревянный топор"}; if (id == "ironPickaxe") {return "Железная кирка"}; if (id == "ironAxe") {return "Железный топор"}
+	if (id == "goldPickaxe") {return "Золотая кирка"}; if (id == "goldAxe") {return "Золотой топор"}; if (id == "coalOre") {return "Угольная руда"}
+	if (id == "ironOre") {return "Железная руда"}; if (id == "goldOre") {return "Золотая руда"}; if (id == "coal") {return "Уголь"}
+	if (id == "furnaceOff") {return "Печь"}
 	return "";
 }
 function max(id) {
@@ -142,6 +190,17 @@ function solid(id) {
 	return solid;
 }
 
+function worldChange(n) {
+	if (world == 0) {cave1 = obj; obj = real}
+	if (world == 1 && n == false) {cave2 = obj; obj = cave1}
+	if (world == 2 && n == false) {cave3 = obj; obj = cave2}
+
+	if (world == 1 && n == true) {real = obj; obj = cave1}
+	if (world == 2 && n == true) {cave1 = obj; obj = cave2}
+	if (world == 3) {cave2 = obj; obj = cave3}
+
+	if (obj[pi()].id != "") {obj[pi()].id = ""}
+}
 function go() {
 	if (x < getx) {x+=0.05} else if (x > getx) {x-=0.05}; if (y < gety) {y+=0.05} else if (y > gety) {y-=0.05}
 	
