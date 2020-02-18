@@ -18,7 +18,7 @@ header {
   background-size: cover;
 }
 
-#header__menu_mini {display: none; position: fixed; left: 0px; top: 0px}
+#header__menu_mini {position: fixed; left: 0px; top: -100px; transition: 0.5s}
 
 .header__main__contant {
   width: 100%;
