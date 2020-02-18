@@ -18,6 +18,8 @@ header {
   background-size: cover;
 }
 
+#header__menu_mini {display: none; position: fixed; left: 0px; top: 0px}
+
 .header__main__contant {
   width: 100%;
   background-color: #0000009e;
