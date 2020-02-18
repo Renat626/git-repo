@@ -8,7 +8,7 @@
 
 	for (let i = 0; i < 56; i++) {for (let i2 = 0; i2 < 36; i2++) {b.push({x:i,y:i2,l:0})}}
 
-	setInterval(function() {game()}, 1000/60);
+	setInterval(function() {game()}, 1000/120);
 }
 
 function game() {
@@ -28,12 +28,12 @@ function game() {
 						if (findn(id) == 3) {newb.push(id)}
 					}
 				}
-		
+
 				if (b[id].l == 1) {
 					if (b[id].x == 0 || b[id].x == 54 || b[id].y == 0 || b[id].y == 34) {delb.push(id)} else {
 						let n = findn(id); if (n < 2 || n > 3) {delb.push(id)}
 					}
-				}				
+				}
 			}
 
 			if (b[id].l == 1) {ctx.fillStyle = "white"; ctx.fillRect(i*20,i2*20,20,20)}

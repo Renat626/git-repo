@@ -2,7 +2,7 @@
 	canv = document.getElementById("gc");
 	ctx = canv.getContext("2d"); // 11 X 7
 
-	mapWidth = 10; mapHeight = 10;
+	mapWidth = 50; mapHeight = 50;
 
 	keyw=keya=keys=keyd=keye=keyq=keyf=keyr=key1=key2=key3=key4=key5=key6=key7=key8=key9=key0=space=shift=going=lockMove=lockSpace=lockInv=invOpen=openMsg=craftOpen=false;
 	x=y=getx=gety=invN=craftN=invRel=hotbarN=loadStep=world=0; load=food=health=100; textMsg1=textMsg2=textMsg3="";
@@ -17,7 +17,7 @@
 }
 
 function preload() {
-	let id = ""; 
+	let id = "";
 	for (let i = 0; i < 41; i++) {
 		if (i == 0) {id = "grass"}; if (i == 1) {id = "tree"}; if (i == 2) {id = "bluebush"}
 		if (i == 3) {id = "redbush"}; if (i == 4) {id = "stone"}; if (i == 5) {id = "bush"}
