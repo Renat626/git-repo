@@ -10,26 +10,19 @@ onscroll = function(e) {
 
 const buttonLeft = document.querySelector(".reviews__arrow__left");
 const buttonRight = document.querySelector(".reviews__arrow__right");
-let left = 0;
-let right = 0;
+const polosa = document.querySelector(".polosa");
 
 buttonLeft.addEventListener('click', sliderLeft);
 buttonRight.addEventListener('click', sliderRight);
 
+let step = 0;
+
 function sliderLeft() {
-	const polosa = document.querySelector(".polosa");
-	left = left + 300;
-	if(left > 0) {
-		left = -600;
-	}
-	polosa.style.left = left + "px";
+	if (step < 0) {step+=300} else {step = -600}
+	polosa.style.left = step + "px";
 }
 
 function sliderRight() {
-	const polosa = document.querySelector(".polosa");
-	right = right - 300;
-	if(right < -600) {
-		right = 0;
-	}
-	polosa.style.left = right + "px";
+	if (step > -600) {step-=300} else {step = 0}
+	polosa.style.left = step + "px";
 }
