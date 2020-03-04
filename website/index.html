@@ -9,7 +9,7 @@
 		<title>document</title>
 	</head>
 	<body>
-		<header>
+		<header id="range">
 			<div class="header__main__contant" id="header__main__contant">
 				<div class="header__contant">
 					<div>
@@ -20,10 +20,21 @@
 
 					<div>
 						<ul class="header__menu">
-							<li><button>О нас</button></li>
-							<li><button>Ассортимент</button></li>
-							<li><button>Отзывы</button></li>
-							<li><button>Купить</button></li>
+							<li><a href="#aboutUs">О нас</a></li>
+							<li><a href="#range">Ассортимент</a></li>
+							<li><a href="#reviews">Отзывы</a></li>
+							<li><a href="#answers">Ответы</a></li>
+						</ul>
+
+						<div class="header__burgerMenu">
+							<button id="burger__button">&#9776;</button>
+						</div>
+
+						<ul class="header__menu header__menu_show">
+							<li><a href="#aboutUs">О нас</a></li>
+							<li><a href="#range">Ассортимент</a></li>
+							<li><a href="#reviews">Отзывы</a></li>
+							<li><a href="#answers">Ответы</a></li>
 						</ul>
 					</div>
 				</div>
@@ -32,10 +43,10 @@
 			<div class="header__main__contant" id="header__menu_mini">
 				<div class="header__contant header__contant_display">
 					<ul class="header__menu header__menu_margin">
-						<li><button>О нас</button></li>
-						<li><button>Ассортимент</button></li>
-						<li><button>Отзывы</button></li>
-						<li><button>Купить</button></li>
+						<li><a href="#aboutUs">О нас</a></li>
+						<li><a href="#range">Ассортимент</a></li>
+						<li><a href="#reviews">Отзывы</a></li>
+						<li><a href="#answers">Ответы</a></li>
 					</ul>
 				</div>
 			</div>
@@ -79,7 +90,7 @@
 			</div>
 		</header>
 
-		<div class="aboutUs">
+		<div class="aboutUs" id="aboutUs">
 			<div class="aboutUs__logo">
 				<h1>Как мы работаем</h1>
 			</div>
@@ -144,7 +155,7 @@
 			</div>
 		</div>
 
-		<div class="reviews">
+		<div class="reviews" id="reviews">
 			<div class="reviews__video">
 				<video class="video" src="video/background.mp4" muted autoplay loop></video>
 			</div>
@@ -168,7 +179,7 @@
 									<p>Отзыв человека</p>
 								</div>
 							</div>
-	
+
 							<div class="reviews__block">
 								<div class="reviews__block__img"><h1>Здесь должно быть фото</h1></div>
 
@@ -201,5 +212,15 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="answers" id="answers">
+			<div class="answers__headline">
+				<h1>Ответы на вопросы</h1>
+			</div>
+		</div>
+
+		<footer>
+
+		</footer>
 	</body>
 </html>

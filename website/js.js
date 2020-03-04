@@ -18,11 +18,34 @@ buttonRight.addEventListener('click', sliderRight);
 let step = 0;
 
 function sliderLeft() {
-	if (step < 0) {step+=300} else {step = -600}
+	if (step < 0) {
+		step += 300;
+	} else {
+		step = -600;
+	}
 	polosa.style.left = step + "px";
 }
 
 function sliderRight() {
-	if (step > -600) {step-=300} else {step = 0}
+	if (step > -600) {
+		step -= 300;
+	} else {
+		step = 0;
+	}
 	polosa.style.left = step + "px";
+}
+
+//header__burgerMenu
+
+const burgerButton = document.querySelector('#burger__button');
+const burgerMenu = document.querySelector('.header__menu_show');
+
+burgerButton.addEventListener('click', showMenu);
+
+function showMenu() {
+	if (burgerMenu.style.display == "block") {
+		burgerMenu.style.display = "none";
+	} else {
+		burgerMenu.style.display = "block";
+	}
 }
