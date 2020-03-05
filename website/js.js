@@ -61,28 +61,44 @@ function showMenu() {
 	}
 }
 
-
 //answers
 
-const question_1 = document.querySelector('#question_1');
-const question_2 = document.querySelector('#question_2');
-const question_3 = document.querySelector('#question_3');
+const question = document.querySelectorAll("#question");
 
-question_1.addEventListener('click', function(){showAnswer(question_1, answer_1)});
-question_2.addEventListener('click', function(){showAnswer(question_2, answer_2)});
-question_3.addEventListener('click', function(){showAnswer(question_3, answer_3)});
+question.forEach(function (item) {
+	item.addEventListener('click', showAnswer);
+})
 
-function showAnswer(que, ans, hei) {
-	if (que.offsetHeight != 54) {
-		que.style.height = "50px";
-		ans.style.visibility = "hidden";
-		ans.style.transition = "0.25s";
-		ans.style.opacity = 0;
-	} 
-	else {
-		que.style.height = ans.offsetHeight+60+"px";
-		ans.style.visibility = "visible";
-		ans.style.transition = "0.8s";
-		ans.style.opacity = 1;
+function showAnswer() {
+	let id = event.target.parentElement.id;
+	let que = event.target.parentElement;
+	let ans = event.target.parentElement.lastElementChild;
+	let que2 = event.target;
+	let ans2 = event.target.lastElementChild;
+
+	if (id == "question") {
+		if (que.offsetHeight != 54) {
+				que.style.height = "50px";
+				ans.style.visibility = "hidden";
+				ans.style.transition = "0.25s";
+				ans.style.opacity = 0;
+			}	else {
+					que.style.height = ans.offsetHeight+60+"px";
+					ans.style.visibility = "visible";
+					ans.style.transition = "0.8s";
+					ans.style.opacity = 1;
+				}
+	} else {
+		if (que2.offsetHeight != 54) {
+				que2.style.height = "50px";
+				ans2.style.visibility = "hidden";
+				ans2.style.transition = "0.25s";
+				ans2.style.opacity = 0;
+			}	else {
+					que2.style.height = ans2.offsetHeight+60+"px";
+					ans2.style.visibility = "visible";
+					ans2.style.transition = "0.8s";
+					ans2.style.opacity = 1;
+				}
 	}
 }
